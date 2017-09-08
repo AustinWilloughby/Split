@@ -33,9 +33,10 @@ public class PlayerMovement : MonoBehaviour
             }
             transform.position = posUpdate;
         }
-        if (Input.GetKeyDown("joystick button 2"))
+        // No switch screens right now
+        /*if (Input.GetKeyDown("joystick button 2"))
         {
             active = !active;
-        }
+        }*/
     }
 }
