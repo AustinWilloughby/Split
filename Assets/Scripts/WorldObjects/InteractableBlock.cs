@@ -6,6 +6,7 @@ public class InteractableBlock : MonoBehaviour {
 
     public DataTypes.World currentWorld;
 
+    private bool isInteractable;
     private Rigidbody2D myRigidBody2d;
     private Transform carrier;
 
@@ -13,6 +14,7 @@ public class InteractableBlock : MonoBehaviour {
     {
         myRigidBody2d = this.gameObject.GetComponent<Rigidbody2D>();
         carrier = null;
+        isInteractable = true;
     }
 
     private void Update()
@@ -45,15 +47,37 @@ public class InteractableBlock : MonoBehaviour {
         }
     }
 
-    public void PickUp(Transform followTarget)
+    public bool PickUp(Transform followTarget)
     {
-        myRigidBody2d.isKinematic = true;
-        carrier = followTarget;
+        if (isInteractable)
+        {
+            isInteractable = false;
+            myRigidBody2d.isKinematic = true;
+            carrier = followTarget;
+            return true;
+        }
+
+        return false;
     }
 
     public void Drop()
     {
+        isInteractable = true;
         myRigidBody2d.isKinematic = false;
         carrier = null;
+    }
+
+    public bool Teleport(DataTypes.World newWorld, float newWorldY)
+    {
+        if (isInteractable)
+        {
+            currentWorld = newWorld;
+            transform.position = new Vector3(transform.position.x, newWorldY, transform.position.z);
+            WorldManager.instance.MoveToWorld(newWorld, transform);
+
+            return true;
+        }
+
+        return false;
     }
 }

@@ -23,13 +23,15 @@ public class WorldManager : MonoBehaviour {
         }
     }
 
-    public void MoveToWorldOne(Transform go)
+    public void MoveToWorld(DataTypes.World world, Transform go)
     {
-        go.parent = worldOneRoot;
-    }
-
-    public void MoveToWorldTwo(Transform go)
-    {
-        go.parent = worldTwoRoot;
+        if (world == DataTypes.World.WorldOne)
+        {
+            go.parent = worldOneRoot;
+        }
+        else
+        {
+            go.parent = worldTwoRoot;
+        }
     }
 }

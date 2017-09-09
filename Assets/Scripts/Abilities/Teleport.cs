@@ -92,10 +92,11 @@ public class Teleport : MonoBehaviour {
 
             if (closestInteractable != null)
             {
-                hasTeleported = true;
                 var interactable = closestInteractable.GetComponent<InteractableBlock>();
-                currentlyTeleported = interactable;
-                TeleportObject(currentlyTeleported);
+
+                hasTeleported = TeleportObject(interactable);
+                if (hasTeleported)
+                    currentlyTeleported = interactable;
             }
         }
     }
@@ -104,24 +105,19 @@ public class Teleport : MonoBehaviour {
     {
         if (myPlayerInfo.active)
         {
-            hasTeleported = false;
-            TeleportObject(currentlyTeleported);
+            hasTeleported = !TeleportObject(currentlyTeleported);
         }
     }
 
-    private void TeleportObject(InteractableBlock teleportObj)
+    private bool TeleportObject(InteractableBlock teleportObj)
     {
         if (teleportObj.currentWorld == DataTypes.World.WorldOne)
         {
-            teleportObj.currentWorld = DataTypes.World.WorldTwo;
-            teleportObj.transform.position = new Vector3(teleportObj.transform.position.x, worldTwoY, teleportObj.transform.position.z);
-            WorldManager.instance.MoveToWorldTwo(teleportObj.transform);
+            return teleportObj.Teleport(DataTypes.World.WorldTwo, worldTwoY);  
         }
         else
         {
-            teleportObj.currentWorld = DataTypes.World.WorldOne;
-            teleportObj.transform.position = new Vector3(teleportObj.transform.position.x, worldOneY, teleportObj.transform.position.z);
-            WorldManager.instance.MoveToWorldOne(teleportObj.transform);
+            return teleportObj.Teleport(DataTypes.World.WorldOne, worldOneY);
         }
     }
 }

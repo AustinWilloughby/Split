@@ -91,10 +91,12 @@ public class Lasso : MonoBehaviour {
 
             if (closestInteractable != null)
             {
-                isCarrying = true;
                 var interactable = closestInteractable.GetComponent<InteractableBlock>();
-                currentlyCarrying = interactable;
-                currentlyCarrying.PickUp(carryLocation);
+                if (interactable.PickUp(carryLocation))
+                {
+                    isCarrying = true;
+                    currentlyCarrying = interactable;
+                }
             }
         }
     }
