@@ -5,9 +5,7 @@ using UnityEngine;
 public class ConduitScript : MonoBehaviour
 {
     public ConduitType type;
-    public ConduitScript partner;
     public BridgeScript target;
-    public GameObject player;
     public float tolerance;
     public bool active;
 
@@ -37,7 +35,6 @@ public class ConduitScript : MonoBehaviour
             objectsOnTopOf.Add(collision.gameObject);
 
             target.SetActiveState(true);
-            GetComponent<SpriteRenderer>().color = partner.GetComponent<SpriteRenderer>().color;
         }
     }
 

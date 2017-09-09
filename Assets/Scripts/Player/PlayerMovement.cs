@@ -9,6 +9,7 @@ public class PlayerMovement : MonoBehaviour
     public float runspeed;
     public int playerNumber;
     public DataTypes.World currentWorld;
+    public Vector3 directionFacing;
 
     Vector3 posUpdate;
     public bool active;
@@ -16,7 +17,7 @@ public class PlayerMovement : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-
+        directionFacing = Vector3.right;
     }
 
     // Update is called once per frame
@@ -27,7 +28,17 @@ public class PlayerMovement : MonoBehaviour
             posUpdate = transform.position;
             if (Mathf.Abs(Input.GetAxis("Horizontal")) > deadzone)
             {
-                posUpdate.x += Input.GetAxis("Horizontal") * runspeed;
+                var dirChange = Input.GetAxis("Horizontal") * runspeed;
+                posUpdate.x += dirChange;
+
+                if (dirChange < 0.0f)
+                {
+                    directionFacing = Vector3.left;
+                }
+                else
+                {
+                    directionFacing = Vector3.right;
+                }
             }
             if (Mathf.Abs(Input.GetAxis("Vertical")) > deadzone)
             {
