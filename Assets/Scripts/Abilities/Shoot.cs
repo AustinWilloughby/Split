@@ -34,5 +34,6 @@ public class Shoot : MonoBehaviour {
     {
         Bullet newBullet = Instantiate<Bullet>(projectile, transform.position, Quaternion.identity);
         newBullet.Init(myPlayerInfo.directionFacing);
+        currentShotCooldown = timeBetweenShots;
     }
 }

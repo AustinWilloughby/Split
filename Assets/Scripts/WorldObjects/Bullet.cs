@@ -8,7 +8,7 @@ public class Bullet : MonoBehaviour {
 
     Rigidbody2D myRigidBody;
 	// Use this for initialization
-	void Start () {
+	void Awake () {
         myRigidBody = gameObject.GetComponent<Rigidbody2D>();
 	}
 
@@ -17,5 +17,12 @@ public class Bullet : MonoBehaviour {
         direction.Normalize();
 
         myRigidBody.velocity = bulletSpeed * direction;
+
+        Destroy(gameObject, 2.0f);
+    }
+
+    public void OnTriggerEnter2D(Collider2D collision)
+    {
+        Destroy(gameObject);
     }
 }

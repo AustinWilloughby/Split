@@ -7,7 +7,7 @@ public class Teleport : MonoBehaviour {
     private PlayerMovement myPlayerInfo;
 
     private const float worldOneY = 5.81f;
-    private const float worldTwoY = -93.7f;
+    private const float worldTwoY = -78.2f;
 
     private List<GameObject> interactables = new List<GameObject>();
     private InteractableBlock currentlyTeleported = null;
