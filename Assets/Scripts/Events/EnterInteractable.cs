@@ -4,12 +4,12 @@ using UnityEngine;
 using UnityEngine.Events;
 
 [System.Serializable]
-public class EnterInteractable : UnityEvent<GameObject> {
+public class PlayerEnterInteractable : UnityEvent<GameObject, int> {
 
 }
 
 [System.Serializable]
-public class ExitInteractable : UnityEvent<GameObject>
+public class PlayerExitInteractable : UnityEvent<GameObject, int>
 {
 
 }

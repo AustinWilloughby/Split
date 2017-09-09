@@ -2,15 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Lasso : MonoBehaviour {
-
-    public Transform carryLocation;
+public class Teleport : MonoBehaviour {
 
     private PlayerMovement myPlayerInfo;
 
-    private List<GameObject> interactables = new List<GameObject> ();
-    private InteractableBlock currentlyCarrying = null;
-    private bool isCarrying;
+    private const float worldOneY = 5.81f;
+    private const float worldTwoY = -93.7f;
+
+    private List<GameObject> interactables = new List<GameObject>();
+    private InteractableBlock currentlyTeleported = null;
+    private bool hasTeleported;
 
     void Start()
     {
@@ -36,13 +37,13 @@ public class Lasso : MonoBehaviour {
         // X on XBox controller
         if (Input.GetButtonDown("Fire3"))
         {
-            if (isCarrying)
+            if (hasTeleported)
             {
-                DropObject();
+                BringObjectBack();
             }
             else
             {
-                PickupObject();
+                TeleportAlternateWorld();
             }
         }
     }
@@ -83,7 +84,7 @@ public class Lasso : MonoBehaviour {
         return closestInteractable;
     }
 
-    private void PickupObject()
+    private void TeleportAlternateWorld()
     {
         if (myPlayerInfo.active)
         {
@@ -91,20 +92,36 @@ public class Lasso : MonoBehaviour {
 
             if (closestInteractable != null)
             {
-                isCarrying = true;
+                hasTeleported = true;
                 var interactable = closestInteractable.GetComponent<InteractableBlock>();
-                currentlyCarrying = interactable;
-                currentlyCarrying.PickUp(carryLocation);
+                currentlyTeleported = interactable;
+                TeleportObject(currentlyTeleported);
             }
         }
     }
 
-    private void DropObject()
+    private void BringObjectBack()
     {
         if (myPlayerInfo.active)
         {
-            isCarrying = false;
-            currentlyCarrying.Drop();
+            hasTeleported = false;
+            TeleportObject(currentlyTeleported);
+        }
+    }
+
+    private void TeleportObject(InteractableBlock teleportObj)
+    {
+        if (teleportObj.currentWorld == DataTypes.World.WorldOne)
+        {
+            teleportObj.currentWorld = DataTypes.World.WorldTwo;
+            teleportObj.transform.position = new Vector3(teleportObj.transform.position.x, worldTwoY, teleportObj.transform.position.z);
+            WorldManager.instance.MoveToWorldTwo(teleportObj.transform);
+        }
+        else
+        {
+            teleportObj.currentWorld = DataTypes.World.WorldOne;
+            teleportObj.transform.position = new Vector3(teleportObj.transform.position.x, worldOneY, teleportObj.transform.position.z);
+            WorldManager.instance.MoveToWorldOne(teleportObj.transform);
         }
     }
 }

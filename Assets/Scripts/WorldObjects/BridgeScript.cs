@@ -30,12 +30,10 @@ public class BridgeScript : MonoBehaviour
     {
         if (active)
         {
-            Debug.Log("We are active");
             transform.position = activePosition;
         }
         else
         {
-            Debug.Log("We are inactive");
             transform.position = inactivePosition;
         }
     }

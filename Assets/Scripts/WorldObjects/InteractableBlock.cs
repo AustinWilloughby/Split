@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class InteractableBlock : MonoBehaviour {
 
+    public DataTypes.World currentWorld;
+
     private Rigidbody2D myRigidBody2d;
     private Transform carrier;
 
@@ -28,8 +30,8 @@ public class InteractableBlock : MonoBehaviour {
 
         if (player != null)
         {
-            //Debug.Log("Thowing a enter event");
-            EventManager.instance.enterInteractableEvt.Invoke(this.gameObject);
+            Debug.Log("Thowing a enter event");
+            EventManager.instance.enterInteractableEvt.Invoke(this.gameObject, player.playerNumber);
         }
     }
 
@@ -39,7 +41,7 @@ public class InteractableBlock : MonoBehaviour {
 
         if (player != null)
         {
-            EventManager.instance.exitInteractableEvt.Invoke(this.gameObject);
+            EventManager.instance.exitInteractableEvt.Invoke(this.gameObject, player.playerNumber);
         }
     }
 

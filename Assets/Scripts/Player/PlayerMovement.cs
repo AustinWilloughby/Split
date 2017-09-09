@@ -7,6 +7,8 @@ public class PlayerMovement : MonoBehaviour
     public string controllerNumber;
     public float deadzone = .3f;
     public float runspeed;
+    public int playerNumber;
+    public DataTypes.World currentWorld;
 
     Vector3 posUpdate;
     public bool active;
@@ -33,10 +35,11 @@ public class PlayerMovement : MonoBehaviour
             }
             transform.position = posUpdate;
         }
-        // No switch screens right now
-        /*if (Input.GetKeyDown("joystick button 2"))
+
+        if (Input.GetButtonDown("Fire2"))
         {
             active = !active;
-        }*/
+
+        }
     }
 }

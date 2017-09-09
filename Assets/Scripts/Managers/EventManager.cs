@@ -7,8 +7,9 @@ public class EventManager : MonoBehaviour {
     public static EventManager instance;
 
     [HideInInspector]
-    public EnterInteractable enterInteractableEvt;
-    public ExitInteractable exitInteractableEvt;
+    public PlayerEnterInteractable enterInteractableEvt;
+    [HideInInspector]
+    public PlayerExitInteractable exitInteractableEvt;
 
     // Use this for initialization
     void Awake()
@@ -22,7 +23,7 @@ public class EventManager : MonoBehaviour {
             Destroy(this.gameObject);
         }
 
-        enterInteractableEvt = new EnterInteractable();
-        exitInteractableEvt = new ExitInteractable();
+        enterInteractableEvt = new PlayerEnterInteractable();
+        exitInteractableEvt = new PlayerExitInteractable();
     }
 }
