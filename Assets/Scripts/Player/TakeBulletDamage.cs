@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DestructableObject : MonoBehaviour {
+public class TakeBulletDamage : MonoBehaviour {
 
     public int hp;
-    public float flashTime;
-    public Color flashColor;
-
+    public float damageTime;
+    public Color damageColor;
     private Color defaultColor;
+
     private SpriteRenderer mySpriteRenderer;
 
     private void Start()
@@ -38,9 +38,8 @@ public class DestructableObject : MonoBehaviour {
 
     private IEnumerator FlashHit()
     {
-        mySpriteRenderer.color = flashColor;
-        yield return new WaitForSeconds(flashTime);
+        mySpriteRenderer.color = damageColor;
+        yield return new WaitForSeconds(damageTime);
         mySpriteRenderer.color = defaultColor;
-
     }
 }

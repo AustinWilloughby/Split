@@ -12,6 +12,7 @@ public class PlayerMovement : MonoBehaviour
     public int playerNumber;
     public bool active;
     public DataTypes.World currentWorld;
+    public Color damageColor;
 
     [HideInInspector]
     public Vector3 directionFacing;
@@ -88,5 +89,10 @@ public class PlayerMovement : MonoBehaviour
             {
             }
         }
+    }
+
+    private void TakeDamage()
+    {
+
     }
 }
