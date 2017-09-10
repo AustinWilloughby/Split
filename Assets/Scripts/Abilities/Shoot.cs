@@ -23,16 +23,30 @@ public class Shoot : MonoBehaviour {
             currentShotCooldown -= Time.deltaTime;
         }
 
-        // A on XBox controller
-        if (Input.GetButtonDown("Fire1") && myPlayerInfo.active && currentShotCooldown <= 0.0f)
+        if (Input.GetButtonDown("Fire4") && myPlayerInfo.active && currentShotCooldown <= 0.0f)
         {
-            ShootProjectile();
+            ShootProjectile(DataTypes.worldDiffY);
+        }
+
+        // A on XBox controller
+        if (Input.GetButtonDown("Fire5") && myPlayerInfo.active && currentShotCooldown <= 0.0f)
+        {
+            ShootProjectile(0.0f);
         }
     }
 
-    private void ShootProjectile()
+    private void ShootProjectile(float yOffset)
     {
-        Bullet newBullet = Instantiate<Bullet>(projectile, transform.position, Quaternion.identity);
+        float newYOffset = 0.0f;
+        if (myPlayerInfo.currentWorld == DataTypes.World.WorldOne)
+        {
+            newYOffset = yOffset;
+        }
+        else
+        {
+            newYOffset = yOffset;
+        }
+        Bullet newBullet = Instantiate<Bullet>(projectile, new Vector3(transform.position.x, transform.position.y + newYOffset, transform.position.z), Quaternion.identity);
         newBullet.Init(myPlayerInfo.directionFacing);
         currentShotCooldown = timeBetweenShots;
     }

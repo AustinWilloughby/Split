@@ -14,3 +14,9 @@ public class PlayerExitInteractable : UnityEvent<GameObject, int>
 
 }
 
+[System.Serializable]
+public class PlayerTouchingFloor : UnityEvent<int>
+{
+
+}
+

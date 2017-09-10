@@ -9,4 +9,6 @@ public class DataTypes {
         WorldOne,
         WorldTwo,
     }
+
+    public const float worldDiffY = 82.5f;
 }
