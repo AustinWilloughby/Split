@@ -47,7 +47,7 @@ public class Shoot : MonoBehaviour {
             newYOffset = yOffset;
         }
         Bullet newBullet = Instantiate<Bullet>(projectile, new Vector3(transform.position.x, transform.position.y + newYOffset, transform.position.z), Quaternion.identity);
-        newBullet.Init(myPlayerInfo.directionFacing);
+        newBullet.Init(myPlayerInfo.directionFacing, DataTypes.BulletOwner.Player);
         currentShotCooldown = timeBetweenShots;
     }
 }

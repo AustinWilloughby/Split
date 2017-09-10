@@ -5,21 +5,27 @@ using UnityEngine;
 public class Bullet : MonoBehaviour {
 
     public float bulletSpeed;
+    public float timeToDestroyBullet;
     public int damage;
 
-    Rigidbody2D myRigidBody;
+    [HideInInspector]
+    public DataTypes.BulletOwner myOwner;
+
+    private Rigidbody2D myRigidBody;
 	// Use this for initialization
 	void Awake () {
         myRigidBody = gameObject.GetComponent<Rigidbody2D>();
 	}
 
-    public void Init(Vector3 direction)
+    public void Init(Vector3 direction, DataTypes.BulletOwner owner)
     {
-        direction.Normalize();
+        Debug.Log("Initalizing bullet" + timeToDestroyBullet);
+        myOwner = owner;
 
+        direction.Normalize();
         myRigidBody.velocity = bulletSpeed * direction;
 
-        Destroy(gameObject, 2.0f);
+        Destroy(gameObject, timeToDestroyBullet);
     }
 
     public void OnTriggerEnter2D(Collider2D collision)

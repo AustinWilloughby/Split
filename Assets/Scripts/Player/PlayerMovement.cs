@@ -16,7 +16,6 @@ public class PlayerMovement : MonoBehaviour
     [HideInInspector]
     public Vector3 directionFacing;
 
-
     private Rigidbody2D myRigidbody2D;
     private bool playerCanJump;
 
@@ -76,6 +75,18 @@ public class PlayerMovement : MonoBehaviour
         if (_playerNumber == playerNumber)
         {
             playerCanJump = true;
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        Bullet bullet = collision.gameObject.GetComponent<Bullet>();
+
+        if (bullet != null)
+        {
+            if (bullet.myOwner == DataTypes.BulletOwner.Enemy)
+            {
+            }
         }
     }
 }

@@ -6,9 +6,6 @@ public class Teleport : MonoBehaviour {
 
     private PlayerMovement myPlayerInfo;
 
-    private const float worldOneY = 5.81f;
-    private const float worldTwoY = -78.2f;
-
     private List<GameObject> interactables = new List<GameObject>();
     private InteractableBlock currentlyTeleported = null;
     private bool hasTeleported;
@@ -113,11 +110,11 @@ public class Teleport : MonoBehaviour {
     {
         if (teleportObj.currentWorld == DataTypes.World.WorldOne)
         {
-            return teleportObj.Teleport(DataTypes.World.WorldTwo, worldTwoY);  
+            return teleportObj.Teleport(DataTypes.World.WorldTwo, DataTypes.worldTwoY);  
         }
         else
         {
-            return teleportObj.Teleport(DataTypes.World.WorldOne, worldOneY);
+            return teleportObj.Teleport(DataTypes.World.WorldOne, DataTypes.worldOneY);
         }
     }
 }
