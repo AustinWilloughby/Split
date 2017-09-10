@@ -20,3 +20,8 @@ public class PlayerTouchingFloor : UnityEvent<int>
 
 }
 
+[System.Serializable]
+public class PlayerChangedBarrier : UnityEvent<bool, int>
+{
+
+}

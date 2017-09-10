@@ -28,7 +28,6 @@ public class Shoot : MonoBehaviour {
             ShootProjectile(DataTypes.worldDiffY);
         }
 
-        // A on XBox controller
         if (Input.GetButtonDown("Fire5") && myPlayerInfo.active && currentShotCooldown <= 0.0f)
         {
             ShootProjectile(0.0f);
@@ -40,7 +39,7 @@ public class Shoot : MonoBehaviour {
         float newYOffset = 0.0f;
         if (myPlayerInfo.currentWorld == DataTypes.World.WorldOne)
         {
-            newYOffset = yOffset;
+            newYOffset = -yOffset;
         }
         else
         {

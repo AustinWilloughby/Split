@@ -19,6 +19,7 @@ public class PlayerMovement : MonoBehaviour
 
     private Rigidbody2D myRigidbody2D;
     private bool playerCanJump;
+    private bool canMove;
 
     // Use this for initialization
     void Start()
@@ -26,15 +27,17 @@ public class PlayerMovement : MonoBehaviour
         myRigidbody2D = gameObject.GetComponent<Rigidbody2D>();
         directionFacing = Vector3.right;
         playerCanJump = true;
+        canMove = true;
 
         EventManager.instance.playerEnterFloor.AddListener(PlayerCanJump);
+        EventManager.instance.playerChangedBarrier.AddListener(PlayerCanMove);
     }
 
     // Update is called once per frame
     void Update()
     {
 
-        if (active)
+        if (active && canMove)
         {
             Vector2 velocityUpdate = new Vector2(0.0f, 0.0f);
             var dirChange = Input.GetAxis("Horizontal");
@@ -76,6 +79,14 @@ public class PlayerMovement : MonoBehaviour
         if (_playerNumber == playerNumber)
         {
             playerCanJump = true;
+        }
+    }
+
+    void PlayerCanMove(bool barrierActive, int _playerNumber)
+    {
+        if (_playerNumber == playerNumber)
+        {
+            canMove = !barrierActive;
         }
     }
 
