@@ -14,6 +14,10 @@ public class EventManager : MonoBehaviour {
     public PlayerTouchingFloor playerEnterFloor;
     [HideInInspector]
     public PlayerChangedBarrier playerChangedBarrier;
+    [HideInInspector]
+    public PlayerTouchRespawn playerTouchRespawn;
+    [HideInInspector]
+    public PlayerOutOfBounds playerOutOfBounds;
 
     // Use this for initialization
     void Awake()
@@ -31,5 +35,7 @@ public class EventManager : MonoBehaviour {
         exitInteractableEvt = new PlayerExitInteractable();
         playerEnterFloor = new PlayerTouchingFloor();
         playerChangedBarrier = new PlayerChangedBarrier();
+        playerTouchRespawn = new PlayerTouchRespawn();
+        playerOutOfBounds = new PlayerOutOfBounds();
     }
 }

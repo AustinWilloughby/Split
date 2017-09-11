@@ -17,6 +17,7 @@ public class PlayerMovement : MonoBehaviour
     [HideInInspector]
     public Vector3 directionFacing;
 
+    private Vector3 respawnLocation;
     private Rigidbody2D myRigidbody2D;
     private bool playerCanJump;
     private bool canMove;
@@ -31,6 +32,8 @@ public class PlayerMovement : MonoBehaviour
 
         EventManager.instance.playerEnterFloor.AddListener(PlayerCanJump);
         EventManager.instance.playerChangedBarrier.AddListener(PlayerCanMove);
+        EventManager.instance.playerTouchRespawn.AddListener(ChangeRespawnLocation);
+        EventManager.instance.playerOutOfBounds.AddListener(RespawnPlayer);
     }
 
     // Update is called once per frame
@@ -87,6 +90,22 @@ public class PlayerMovement : MonoBehaviour
         if (_playerNumber == playerNumber)
         {
             canMove = !barrierActive;
+        }
+    }
+
+    void ChangeRespawnLocation(GameObject _respawnLocation, int _playerNumber)
+    {
+        if (_playerNumber == playerNumber)
+        {
+            respawnLocation = new Vector3(_respawnLocation.transform.position.x, _respawnLocation.transform.position.y + 5.0f, transform.position.z);
+        }
+    }
+
+    void RespawnPlayer(int _playerNumber)
+    {
+        if (_playerNumber == playerNumber)
+        {
+            transform.position = respawnLocation;
         }
     }
 

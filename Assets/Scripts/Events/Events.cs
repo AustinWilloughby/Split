@@ -21,7 +21,18 @@ public class PlayerTouchingFloor : UnityEvent<int>
 }
 
 [System.Serializable]
+public class PlayerTouchRespawn : UnityEvent<GameObject, int>
+{
+
+}
+
+[System.Serializable]
 public class PlayerChangedBarrier : UnityEvent<bool, int>
+{
+
+}
+[System.Serializable]
+public class PlayerOutOfBounds : UnityEvent<int>
 {
 
 }

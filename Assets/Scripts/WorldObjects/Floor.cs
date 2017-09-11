@@ -11,6 +11,7 @@ public class Floor : MonoBehaviour {
         if (player != null)
         {
             EventManager.instance.playerEnterFloor.Invoke(player.playerNumber);
+            EventManager.instance.playerTouchRespawn.Invoke(this.gameObject, player.playerNumber);
         }
     }
 }
