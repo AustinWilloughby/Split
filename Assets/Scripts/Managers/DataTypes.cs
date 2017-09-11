@@ -17,6 +17,6 @@ public class DataTypes {
     }
 
     public const float worldDiffY = 82.5f;
-    public const float worldOneY = 5.81f;
-    public const float worldTwoY = -78.2f;
+    public const float worldOneY = 6.81f;
+    public const float worldTwoY = -77.2f;
 }

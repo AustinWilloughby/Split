@@ -42,6 +42,16 @@ public class BridgeScript : MonoBehaviour
     {
         active = state;
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        PlayerMovement player = collision.gameObject.GetComponent<PlayerMovement>();
+
+        if (player != null)
+        {
+            EventManager.instance.playerEnterFloor.Invoke(player.playerNumber);
+        }
+    }
 }
 public enum SlideDirection
 {
