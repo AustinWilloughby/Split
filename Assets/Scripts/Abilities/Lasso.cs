@@ -17,6 +17,8 @@ public class Lasso : MonoBehaviour {
         myPlayerInfo = gameObject.GetComponent<PlayerMovement>();
         EventManager.instance.enterInteractableEvt.AddListener(PlayerNextToInteractable);
         EventManager.instance.exitInteractableEvt.AddListener(PlayerLeftInteractable);
+        EventManager.instance.blockOutOfBounds.AddListener(ResetBlockOOB);
+        EventManager.instance.playerOutOfBounds.AddListener(RespawnBlock);
     }
 
     private void Update()
@@ -59,6 +61,27 @@ public class Lasso : MonoBehaviour {
         if (myPlayerInfo.playerNumber == playerNumber)
         {
             interactables.Remove(interactable);
+        }
+    }
+
+    private void ResetBlockOOB(GameObject blockOOB)
+    {
+        InteractableBlock block = blockOOB.GetComponent<InteractableBlock>();
+
+        if (block != null)
+        {
+            if (block == currentlyCarrying)
+            {
+                isCarrying = false;
+            }
+        }
+    }
+
+    private void RespawnBlock(int _playerNumber)
+    {
+        if (isCarrying && _playerNumber == myPlayerInfo.playerNumber)
+        {
+            EventManager.instance.blockOutOfBounds.Invoke(currentlyCarrying.gameObject);
         }
     }
 
@@ -107,6 +130,7 @@ public class Lasso : MonoBehaviour {
         {
             isCarrying = false;
             currentlyCarrying.Drop();
+            currentlyCarrying = null;
         }
     }
 }

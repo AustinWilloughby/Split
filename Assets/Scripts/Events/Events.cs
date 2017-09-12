@@ -15,6 +15,18 @@ public class PlayerExitInteractable : UnityEvent<GameObject, int>
 }
 
 [System.Serializable]
+public class PlayerEnterEndOfLevel : UnityEvent<int>
+{
+
+}
+
+[System.Serializable]
+public class PlayerExitEndOfLevel : UnityEvent<int>
+{
+
+}
+
+[System.Serializable]
 public class PlayerTouchingFloor : UnityEvent<int>
 {
 
@@ -31,8 +43,15 @@ public class PlayerChangedBarrier : UnityEvent<bool, int>
 {
 
 }
+
 [System.Serializable]
 public class PlayerOutOfBounds : UnityEvent<int>
+{
+
+}
+
+[System.Serializable]
+public class BlockOutOfBounds : UnityEvent<GameObject>
 {
 
 }

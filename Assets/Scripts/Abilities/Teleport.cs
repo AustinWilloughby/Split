@@ -13,8 +13,10 @@ public class Teleport : MonoBehaviour {
     void Start()
     {
         myPlayerInfo = gameObject.GetComponent<PlayerMovement>();
+
         EventManager.instance.enterInteractableEvt.AddListener(PlayerNextToInteractable);
         EventManager.instance.exitInteractableEvt.AddListener(PlayerLeftInteractable);
+        EventManager.instance.blockOutOfBounds.AddListener(ResetBlockOOB);
     }
 
     private void Update()
@@ -57,6 +59,20 @@ public class Teleport : MonoBehaviour {
         if (myPlayerInfo.playerNumber == playerNumber)
         {
             interactables.Remove(interactable);
+        }
+    }
+
+    private void ResetBlockOOB(GameObject blockOOB)
+    {
+        InteractableBlock block = blockOOB.GetComponent<InteractableBlock>();
+
+        if (block != null)
+        {
+            if (block == currentlyTeleported)
+            {
+                hasTeleported = false;
+                currentlyTeleported = null;
+            }
         }
     }
 

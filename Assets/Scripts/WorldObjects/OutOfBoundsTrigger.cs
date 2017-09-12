@@ -11,6 +11,15 @@ public class OutOfBoundsTrigger : MonoBehaviour {
         if (player != null)
         {
             EventManager.instance.playerOutOfBounds.Invoke(player.playerNumber);
+            return;
+        }
+
+        InteractableBlock block = collision.gameObject.GetComponent<InteractableBlock>();
+
+        if (block != null)
+        {
+            EventManager.instance.blockOutOfBounds.Invoke(collision.gameObject);
+            return;
         }
     }
 }

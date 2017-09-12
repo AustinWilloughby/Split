@@ -9,12 +9,18 @@ public class InteractableBlock : MonoBehaviour {
     private bool isInteractable;
     private Rigidbody2D myRigidBody2d;
     private Transform carrier;
+    private Vector3 originalPosition;
+    private DataTypes.World originalWorld;
 
     private void Start()
     {
         myRigidBody2d = this.gameObject.GetComponent<Rigidbody2D>();
         carrier = null;
         isInteractable = true;
+        originalPosition = this.gameObject.transform.position;
+        originalWorld = currentWorld;
+
+        EventManager.instance.blockOutOfBounds.AddListener(ResetBlock);
     }
 
     private void Update()
@@ -44,6 +50,19 @@ public class InteractableBlock : MonoBehaviour {
         if (player != null)
         {
             EventManager.instance.exitInteractableEvt.Invoke(this.gameObject, player.playerNumber);
+        }
+    }
+
+    private void ResetBlock(GameObject blockOOB)
+    {
+        if (blockOOB == this.gameObject)
+        {
+            carrier = null;
+            isInteractable = true;
+            transform.position = originalPosition;
+            myRigidBody2d.isKinematic = false;
+            currentWorld = originalWorld;
+            WorldManager.instance.MoveToWorld(currentWorld, transform);
         }
     }
 
