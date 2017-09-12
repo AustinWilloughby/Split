@@ -34,6 +34,9 @@ public class PlayerMovement : MonoBehaviour
         EventManager.instance.playerChangedBarrier.AddListener(PlayerCanMove);
         EventManager.instance.playerTouchRespawn.AddListener(ChangeRespawnLocation);
         EventManager.instance.playerOutOfBounds.AddListener(RespawnPlayer);
+
+        // comment out for one controller dev.
+        active = true;
     }
 
     // Update is called once per frame
@@ -43,7 +46,7 @@ public class PlayerMovement : MonoBehaviour
         if (active && canMove)
         {
             Vector2 velocityUpdate = new Vector2(0.0f, 0.0f);
-            var dirChange = Input.GetAxis("Horizontal");
+            var dirChange = InputManager.instance.GetHorizontalForPlayer(playerNumber);
             if (Mathf.Abs(dirChange) > deadzone)
             {
                 if (dirChange < 0.0f)
@@ -57,7 +60,7 @@ public class PlayerMovement : MonoBehaviour
 
                 velocityUpdate.x = dirChange * runspeed;
             }
-            if (Input.GetButtonDown("Fire1") && playerCanJump)
+            if (InputManager.instance.GetButtonDownForPlayer(playerNumber, "Fire1") && playerCanJump)
             {
                 velocityUpdate.y = jumpspeed;
                 playerCanJump = false;
@@ -66,15 +69,19 @@ public class PlayerMovement : MonoBehaviour
 
             if (myRigidbody2D.velocity.x > maxRunspeed || myRigidbody2D.velocity.x < -maxRunspeed)
             {
-                myRigidbody2D.velocity = new Vector2 (maxRunspeed * directionFacing.x, myRigidbody2D.velocity.y);
+                myRigidbody2D.velocity = new Vector2(maxRunspeed * directionFacing.x, myRigidbody2D.velocity.y);
             }
         }
 
-        if (Input.GetButtonDown("Fire2"))
+        // For development with just one controller:
+        // 1) Uncomment this line.
+        // 2) Make sure one of the players is initially set to active and the other to inactive.
+        // 3) Make sure inputmanager is always reading input for P1.
+        /*if (Input.GetButtonDown("Fire2"))
         {
             active = !active;
 
-        }
+        }*/
     }
 
     void PlayerCanJump(int _playerNumber)
@@ -107,22 +114,5 @@ public class PlayerMovement : MonoBehaviour
         {
             transform.position = respawnLocation;
         }
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        Bullet bullet = collision.gameObject.GetComponent<Bullet>();
-
-        if (bullet != null)
-        {
-            if (bullet.myOwner == DataTypes.BulletOwner.Enemy)
-            {
-            }
-        }
-    }
-
-    private void TakeDamage()
-    {
-
     }
 }

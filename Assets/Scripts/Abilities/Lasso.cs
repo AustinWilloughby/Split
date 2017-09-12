@@ -23,20 +23,8 @@ public class Lasso : MonoBehaviour {
 
     private void Update()
     {
-        // A on Xbox controller
-        /*if (Input.GetButtonDown("Fire1"))
-        {
-            Debug.Log("Fire1");
-
-        }
-        // B on Xbox controller
-        if (Input.GetButtonDown("Fire2"))
-        {
-            Debug.Log("Fire2");
-
-        }*/
         // X on XBox controller
-        if (Input.GetButtonDown("Fire3"))
+        if (InputManager.instance.GetButtonDownForPlayer(myPlayerInfo.playerNumber, "Fire3"))
         {
             if (isCarrying)
             {

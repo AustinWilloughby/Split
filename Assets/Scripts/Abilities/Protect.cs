@@ -17,20 +17,20 @@ public class Protect : MonoBehaviour {
 
     private void Update()
     {
-        if (Input.GetButtonDown("Fire4") && myPlayerInfo.active && !barrier.activeSelf)
+        if (InputManager.instance.GetButtonDownForPlayer(myPlayerInfo.playerNumber, "Fire4") && myPlayerInfo.active && !barrier.activeSelf)
         {
             PlaceBarrier(0.0f);
         }
-        else if (Input.GetButtonUp("Fire4") && myPlayerInfo.active && barrier.activeSelf)
+        else if (InputManager.instance.GetButtonUpForPlayer(myPlayerInfo.playerNumber, "Fire4") && myPlayerInfo.active && barrier.activeSelf)
         {
             ReleaseBarrier();
         }
 
-        if (Input.GetButtonDown("Fire5") && myPlayerInfo.active && !barrier.activeSelf)
+        if (InputManager.instance.GetButtonDownForPlayer(myPlayerInfo.playerNumber, "Fire5") && myPlayerInfo.active && !barrier.activeSelf)
         {
             PlaceBarrier(DataTypes.worldDiffY);
         }
-        else if (Input.GetButtonUp("Fire5") && myPlayerInfo.active && barrier.activeSelf)
+        else if (InputManager.instance.GetButtonUpForPlayer(myPlayerInfo.playerNumber, "Fire5") && myPlayerInfo.active && barrier.activeSelf)
         {
             ReleaseBarrier();
         }

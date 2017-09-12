@@ -23,12 +23,12 @@ public class Shoot : MonoBehaviour {
             currentShotCooldown -= Time.deltaTime;
         }
 
-        if (Input.GetButtonDown("Fire4") && myPlayerInfo.active && currentShotCooldown <= 0.0f)
+        if (InputManager.instance.GetButtonDownForPlayer(myPlayerInfo.playerNumber, "Fire4") && myPlayerInfo.active && currentShotCooldown <= 0.0f)
         {
             ShootProjectile(DataTypes.worldDiffY);
         }
 
-        if (Input.GetButtonDown("Fire5") && myPlayerInfo.active && currentShotCooldown <= 0.0f)
+        if (InputManager.instance.GetButtonDownForPlayer(myPlayerInfo.playerNumber, "Fire5") && myPlayerInfo.active && currentShotCooldown <= 0.0f)
         {
             ShootProjectile(0.0f);
         }
