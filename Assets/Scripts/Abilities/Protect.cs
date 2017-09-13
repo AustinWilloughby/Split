@@ -21,7 +21,7 @@ public class Protect : MonoBehaviour {
         {
             PlaceBarrier(0.0f);
         }
-        else if (InputManager.instance.GetButtonUpForPlayer(myPlayerInfo.playerNumber, "Fire4") && myPlayerInfo.active && barrier.activeSelf)
+        else if ((InputManager.instance.GetButtonUpForPlayer(myPlayerInfo.playerNumber, "Fire4") && barrier.activeSelf) || (!myPlayerInfo.active))
         {
             ReleaseBarrier();
         }
@@ -30,7 +30,7 @@ public class Protect : MonoBehaviour {
         {
             PlaceBarrier(DataTypes.worldDiffY);
         }
-        else if (InputManager.instance.GetButtonUpForPlayer(myPlayerInfo.playerNumber, "Fire5") && myPlayerInfo.active && barrier.activeSelf)
+        else if ((InputManager.instance.GetButtonUpForPlayer(myPlayerInfo.playerNumber, "Fire5") && barrier.activeSelf) || (!myPlayerInfo.active))
         {
             ReleaseBarrier();
         }

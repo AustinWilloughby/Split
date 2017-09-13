@@ -48,9 +48,15 @@ public class WorldManager : MonoBehaviour {
     public Vector3 GetPlayerLocation(DataTypes.World world)
     {
         if (world == DataTypes.World.WorldOne)
+        {
+            Debug.Log("Looking at player: " + myPlayerOneInfo.playerNumber + " at position: " + myPlayerOneInfo.transform.position);
             return myPlayerOneInfo.transform.position;
+        }
         else
+        {
+            Debug.Log("Looking at player: " + myPlayerTwoInfo.playerNumber + " at position: " + myPlayerTwoInfo.transform.position);
             return myPlayerTwoInfo.transform.position;
+        }
     }
 
     private void AddPlayerToEndOfLevelLookup(int player)

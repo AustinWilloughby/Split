@@ -24,6 +24,7 @@ public class ShootAIBehavior : MonoBehaviour {
             currentShotCooldown -= Time.deltaTime;
 
         dirToPlayer = transform.position - WorldManager.instance.GetPlayerLocation(myWorld);
+        Debug.Log("Enemy location: " + transform.position);
         if (dirToPlayer.magnitude <= distanceToShootPlayer && currentShotCooldown <= 0.0f)
             ShootProjectile();
     }

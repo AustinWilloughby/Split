@@ -36,7 +36,7 @@ public class PlayerMovement : MonoBehaviour
         EventManager.instance.playerOutOfBounds.AddListener(RespawnPlayer);
 
         // comment out for one controller dev.
-        active = true;
+        //active = true;
     }
 
     // Update is called once per frame
@@ -77,11 +77,11 @@ public class PlayerMovement : MonoBehaviour
         // 1) Uncomment this line.
         // 2) Make sure one of the players is initially set to active and the other to inactive.
         // 3) Make sure inputmanager is always reading input for P1.
-        /*if (Input.GetButtonDown("Fire2"))
+        if (InputManager.instance.GetButtonDownForPlayer(playerNumber, "Fire2"))
         {
             active = !active;
 
-        }*/
+        }
     }
 
     void PlayerCanJump(int _playerNumber)
